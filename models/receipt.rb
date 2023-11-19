@@ -4,6 +4,9 @@
 class Receipt
   attr_accessor :sales_tax, :total, :products
 
+  BASIC_SALES_TAX = 0.1
+  IMPORT_DUTY_TAX = 0.05
+
   def initialize
     @sales_tax = 0
     @total = 0
@@ -16,29 +19,22 @@ class Receipt
 
   def calculate_totals
     @products.each do |product|
-      product_tax = (product.price * 0.1).round(2)
-      @sales_tax += product_tax
-      @total += (product.price + product_tax)
+      @sales_tax += product.total_tax
+      @total += (product.price + @sales_tax)
     end
   end
 
   def to_s
     result = ''
+
     @products.each do |product|
-      result += "#{product.quantity}, #{product.name}, #{'%.2f' % (product.price + calculate_tax(product.price))}\n"
+      result += "#{product.quantity}, #{product.name}, #{product.total}\n"
     end
 
     result += "\n"
-    result += "Sales Taxes: #{'%.2f' % @sales_tax}\n"
-    result += "Total: #{'%.2f' % @total}\n"
+    result += "Sales Taxes: #{@sales_tax}\n"
+    result += "Total: #{@total}\n"
     result
-  end
-
-  private
-
-  def calculate_tax(price)
-    # For simplicity, a flat 10% sales tax on all products
-    (price * 0.1).round(2)
   end
 end
 
