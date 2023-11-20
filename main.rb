@@ -10,7 +10,8 @@ require 'optparse'
 require 'byebug'
 
 # Usage:
-if __FILE__ == $0  # This block will execute only if the script is run directly from the command line
+# This block will execute only if the script is run directly from the command line
+if __FILE__ == $0
   options = { output_file: nil }
   OptionParser.new do |opts|
     opts.banner = 'Usage: ruby main.rb INPUT_FILE [options]'

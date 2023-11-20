@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
+require 'byebug'
 
 # CsvReader is a utility class for reading CSV files containing product information.
 class CsvReader
