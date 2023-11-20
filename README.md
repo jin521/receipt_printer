@@ -38,12 +38,11 @@ ruby main.rb sample_inputs/sample2.csv
 ruby main.rb sample_inputs/sample3.csv
 
 or output to csv:
+# NOTE: it would be a malformed csv if follow the requirements, so only show the products on the csv
 ruby main.rb sample_inputs/sample1.csv --output output1.csv
 ruby main.rb sample_inputs/sample2.csv --output output2.csv
 ruby main.rb sample_inputs/sample3.csv --output output3.csv
 ```
-
-## Configuration
 
 ## Contributing
 
