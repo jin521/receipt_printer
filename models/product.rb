@@ -23,7 +23,8 @@ class Product
   end
 
   def total
-    price + total_tax
+    total = price + total_tax
+    format('%.2f', total).to_f
   end
 
   def exempt?
@@ -49,13 +50,13 @@ class Product
   end
 
   def rounding(tax_rate, shelf_price)
-    value = (tax_rate * shelf_price) / 100
+    raw_tax = (tax_rate * shelf_price) / 100
+    rounded_tax = round_to_nearest(raw_tax)
 
-    # Round up to the nearest 0.05
-    rounded_value = (value * 20.0).ceil / 20.0
+    format('%.2f', rounded_tax).to_f
+  end
 
-    # Ensure the result has two decimal places
-    format('%.2f', rounded_value).to_f
+  def round_to_nearest(value)
+    (value * 20.0).ceil / 20.0
   end
 end
-

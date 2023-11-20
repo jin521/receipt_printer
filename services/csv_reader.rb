@@ -1,6 +1,8 @@
-require 'csv'
-require 'byebug'
+# frozen_string_literal: true
 
+require 'csv'
+
+# CsvReader is a utility class for reading CSV files containing product information.
 class CsvReader
   def self.read(file_path)
     products = []
