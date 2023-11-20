@@ -7,6 +7,9 @@ class Product
   BASIC_SALES_TAX = 0.1
   IMPORT_DUTY_TAX = 0.05
 
+  IMPORTED_KEYWORDS = %w[imported import].freeze
+  EXEMPT_KEYWORDS = %w[book books food medical pills chocolate chocolates].freeze
+
   def initialize(quantity, name, price)
     @quantity = quantity
     @name = name
@@ -28,35 +31,19 @@ class Product
   end
 
   def exempt?
-    exempt_keywords.any? { |keyword| name.include?(keyword) }
+    EXEMPT_KEYWORDS.any? { |keyword| name.include?(keyword) }
   end
 
   def imported?
-    imported_keywords.any? { |keyword| name.include?(keyword) }
-  end
-
-  def to_s
-    "Quantity: #{@quantity}, Product: #{@name}, Price: #{@price}"
+    IMPORTED_KEYWORDS.any? { |keyword| name.include?(keyword) }
   end
 
   private
 
-  def imported_keywords
-    %w[imported import]
-  end
-
-  def exempt_keywords
-    %w[book books food medical pills chocolate chocolates]
-  end
-
   def rounding(tax_rate, shelf_price)
     raw_tax = (tax_rate * shelf_price) / 100
-    rounded_tax = round_to_nearest(raw_tax)
+    rounded_tax = (raw_tax * 20.0).ceil / 20.0
 
     format('%.2f', rounded_tax).to_f
-  end
-
-  def round_to_nearest(value)
-    (value * 20.0).ceil / 20.0
   end
 end

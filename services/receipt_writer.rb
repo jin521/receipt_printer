@@ -6,10 +6,7 @@ class ReceiptWriter
   def self.write(receipt, output_file_name)
     result = receipt.products.map { |product| "#{product.quantity}, #{product.name}, #{product.total}" }.join("\n")
 
-    result += "\n"
-    result += "\n"
-    result += "Sales Taxes: #{receipt.sales_tax}\n"
-    result += "Total: #{receipt.total}\n"
+    # NOTE: it would be a malformed csv if follow the requirement, so leaving only the products on the csv
 
     File.write(output_file_name, result)
   end
